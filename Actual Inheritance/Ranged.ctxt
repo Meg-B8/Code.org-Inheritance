@@ -1,8 +1,0 @@
-#BlueJ class context
-comment0.target=Ranged
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ Ranged\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
-comment1.params=name\ val\ description\ damage\ parry\ dur
-comment1.target=Ranged(java.lang.String,\ int,\ java.lang.String,\ int,\ boolean,\ int)
-comment2.params=
-comment2.target=boolean\ hits()
-numComments=3
