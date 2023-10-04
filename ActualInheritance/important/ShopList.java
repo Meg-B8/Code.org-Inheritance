@@ -97,8 +97,8 @@ public class ShopList
     public Item ShoppingSpree(){
         if (shopping){
             System.out.println("-------------------------------");
-            System.out.println("Please choose from these three categories to shop from:"
-                + "\n 1. Consumables" + "\n 2. Defenses" + "\n 3. Weapons" + "\n 4. Stop Shopping");
+            System.out.println("Please choose from these four categories to look at:"
+                + "\n 1. Consumables" + "\n 2. Defenses" + "\n 3. Weapons" + "\n 4. Look at items bought" + "\n 5. Stop Shopping");
             String cat = scanner.nextLine();
             // while (cat != 0)
             if (cat.toLowerCase().equals("consumables") 
@@ -110,8 +110,26 @@ public class ShopList
             } else if (cat.toLowerCase().equals("weapons") || 
             cat.toLowerCase().equals("3")){
                 return weapons();
-            } else if (cat.toLowerCase().equals("stop shopping") || cat.toLowerCase().equals("4")) {
+            } else if (cat.toLowerCase().equals("look at items bought") || cat.toLowerCase().equals("4")) {
+            	 System.out.println("Here are the items you've bought:");
+                 //All but the last item
+            	 if (gotItems.size() <= 0) {
+            		 System.out.println("Nothing's here~! Go spend some money!\n");
+            		 return ShoppingSpree();
+            	 } else {
+                 for (int i = 0; i < gotItems.size()-1; i++){
+                     System.out.print(" " + gotItems.get(i).getName() + ",");
+                 }
+                 //Print last item
+                 System.out.print(" " + gotItems.get(gotItems.size()-1).getName());
+                 System.out.println();
+                 ShoppingSpree();
+            	 }
+            } else if (cat.toLowerCase().equals("stop shopping") || cat.toLowerCase().equals("5")) {
             	shopping = false;
+            } else {
+            	System.out.println("That's not in our system!");
+                return ShoppingSpree();
             }
         } 
         return null;

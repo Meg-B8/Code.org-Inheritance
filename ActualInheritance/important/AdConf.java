@@ -2,11 +2,8 @@ package important;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import gametime.AttackBoost;
 import gametime.Consumable;
-import gametime.DefBoost;
 import gametime.Defense;
-import gametime.Food;
 import gametime.Item;
 import gametime.Weapon;
 /**
@@ -18,9 +15,10 @@ import gametime.Weapon;
 public class AdConf
 {
     private boolean configuring = true; 
-    private Adventurer play = null;
-    private Backpack packs = null;
-    private String name = "billy jean";
+    private Adventurer play;
+    private Backpack packs;
+    private String name;
+    private Boolean notInPack = true;
     private ArrayList<Item> packItems;
     Scanner scanner = new Scanner(System.in).useDelimiter("~");
     public AdConf(Adventurer player){
@@ -53,7 +51,7 @@ public class AdConf
         return play;
     }
     public void stats(){
-        System.out.print("Name: " + play.getName());
+        System.out.print("Name: " + name);
         System.out.println("  Coins: " + play.getMoney());
         System.out.print("Health: " + play.getHealth());
         System.out.print("  Defense: " + play.getDefense());
@@ -80,9 +78,8 @@ public class AdConf
 
     public Adventurer pack(){
         if (configuring){
-            System.out.println("Here are the items in your backpack:");
+            System.out.println("Here are the items in your backpack! Type in 'cancel' to use none.");
             packItems = packs.getInventory();
-            
             //All but the last item
             for (int i = 0; i < packItems.size()-1; i++){
                 System.out.print(" " + packItems.get(i).getName() + ",");
@@ -93,26 +90,30 @@ public class AdConf
             
             System.out.println("What would you like to use?");
             String obj = scanner.nextLine();
-            for (Item i : packItems){
-                if (obj.toLowerCase().equals(i.getName().toLowerCase())){
-                	packContinued(i);
-                } 
+            if (obj.toLowerCase().equals("cancel")) {
+            	Configuring();
+            } else {
+            for (int i = 0; i < packItems.size(); i++){
+                if (obj.toLowerCase().equals(packItems.get(i).getName().toLowerCase())){
+                	packContinued(packItems.get(i));
+                	notInPack = false;
+                	break;
+                } else {notInPack = true;} 
             }
-              	System.out.println("Sorry, please type that again!");
+           if (notInPack) {
+            	System.out.println("Sorry, please type that again!");
               	pack();
+            	}
+            }
+         }
                 if (configuring) {
                 	   continueConf();	
                 }
         
-        }
         return play;
     }
     public Adventurer packContinued(Item equip) {
     	  if (equip instanceof Consumable){
-    		  
-    		   if (equip instanceof Food) {
-    			  System.out.println("Your health rose " + ((Food) equip).getVal() + "!");
-    		  }
               play.consume((Consumable)equip); 
           } else if (equip instanceof Weapon){
         	  System.out.println("Your attack rose " + ((Weapon) equip).getDamage() + "!");

@@ -121,15 +121,13 @@ public class Adventurer extends Character
     }
 
     public void unequip(Item item){
+    	backpack.storeItem(item);
         if (item instanceof Weapon){
             attack -= ((Weapon)item).getDamage();
-            backpack.storeItem(item);
             handSlot = null;
         } else if (item instanceof Defense){
             defense -= ((Defense)item).getDefense();
-            backpack.storeItem(item);
             armSlot = null;
         }
-        backpack.storeItem(item);
     }
 }

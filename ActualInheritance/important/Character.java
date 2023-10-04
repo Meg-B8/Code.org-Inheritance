@@ -55,7 +55,9 @@ public abstract class Character
     		System.out.print(" NOTHING ");
     	}
     }
-
+    public void setName(String name) {
+    	this.name = name;
+    }
     //slots
     public Item getArm(){
         if (armSlot instanceof Defense){

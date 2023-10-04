@@ -35,6 +35,7 @@ public class Game
         System.out.println("Hi there adventurer! Welcome to our world.");
         System.out.println("Please enter your name.\n(Note: you cannot change it after)");
         name = scanner.nextLine();
+        player.setName(name);
         System.out.println("Hi there, " + name + "! Here is 200 coins.");
         System.out.println("Here adventurers like you often start at the shop" + 
             "\nand hunt or gather materials.");
@@ -79,8 +80,8 @@ public class Game
         System.out.println("^0^ ----System's Simple Gamble!---- ^0^");
         System.out.println("\n \nWelcome to my gambling game!" + 
             "\nPlease pick a number between 1-10, then the amount you want to" + 
-            "\ngamble. If your number matches then it multiplies by the amount you" + 
-            "\nput down! Otherwise you lose it all.");
+            "\ngamble. If your number matches the fortune I pull then it multiplies by the amount you" + 
+            "\nput down! Otherwise you lose your bet.");
         System.out.print("Number you're guessing: ");
         int gambleNum = intScanner.nextInt();
         System.out.print("Amount bet: ");
